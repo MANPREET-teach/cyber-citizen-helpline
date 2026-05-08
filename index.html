@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CyberShield">
+  <meta name="theme-color" content="#0f0f23">
+  <meta name="description" content="National Cyber Crime Reporting Portal - 24/7 Support">
+  <title>Cybercitzen--help</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Loading Page -->
+  <div id="loadingPage" class="loading-page">
+    <div class="loading-container">
+      <img src="images/banner.jpeg" alt="CyberShield" class="loading-image">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Loading...</p>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <i class="fas fa-shield-halved"></i>
+        <span>Cybercitizen<span>helpline</span></span>
+        <span class="badge" style="margin-left: 0.5rem;">Govt. of India</span>
+      </div>
+      <div class="nav-links">
+        <a class="active" data-page="dashboard">Dashboard</a>
+        <a data-page="complaint">File Complaint</a>
+        <a data-page="cyber-cell">Cyber Cell</a>
+        <a data-page="tools">Security Tools</a>
+        <a data-page="track">Track Complaint</a>
+      </div>
+      <div>
+        <div id="authButton" class="btn-outline" style="display: inline-block;">
+          <i class="fas fa-user"></i> Login
+        </div>
+        <div id="userInfo" style="display: none;" class="user-badge">
+          <i class="fas fa-user-circle"></i>
+          <span id="userName"></span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Cyber Department Banner -->
+    <div class="cyber-department cybercitizen_- helpline">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div>
+          <h2><i class="fas fa-landmark"></i> National Cyber Crime Reporting Portal</h2>
+          <p>24/7 Cyber Crime Reporting | Indian Cyber Crime Coordination Centre (I4C)</p>
+        </div>
+        <div>
+          <span class="badge"><i class="fas fa-phone"></i> Helpline: 1930</span>
+          <span class="badge"><i class="fas fa-envelope"></i> cybercell@gov.in</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent">
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-number" id="totalComplaints">0</div>
+          <div>Total Complaints Filed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="activeInvestigations">0</div>
+          <div>Active Investigations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="resolvedCases">0</div>
+          <div>Resolved Cases</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="cyberExperts">24</div>
+          <div>Cyber Experts Online</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-gavel"></i>
+            <h3>Quick File Complaint</h3>
+          </div>
+          <p>Report cyber crimes including:</p>
+          <ul style="margin: 1rem 0 0 1.5rem;">
+            <li>Online Financial Fraud</li>
+            <li>Social Media Hacking</li>
+            <li>Cyber Stalking/Harassment</li>
+            <li>Ransomware Attack</li>
+            <li>Data Breach</li>
+          </ul>
+          <button class="btn-primary" style="margin-top: 1rem; width: 100%;" onclick="window.navigateToComplaint()">
+            <i class="fas fa-file-alt"></i> File Cyber Complaint
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-bell"></i>
+            <h3>Latest Cyber Alerts</h3>
+          </div>
+          <div id="cyberAlerts"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-chart-line"></i>
+            <h3>Cyber Crime Statistics</h3>
+          </div>
+          <div id="crimeStats"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- File Complaint Page -->
+    <div id="complaintContent" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-file-alt"></i>
+          <h2>File Cyber Crime Complaint</h2>
+        </div>
+        <form id="complaintForm">
+          <div class="input-group">
+            <label>Full Name *</label>
+            <input type="text" id="compName" required>
+          </div>
+          <div class="input-group">
+            <label>Email Address *</label>
+            <input type="email" id="compEmail" required>
+          </div>
+          <div class="input-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="compPhone" required>
+          </div>
+          <div class="input-group">
+            <label>Aadhaar Number (Optional)</label>
+            <input type="text" id="compAadhaar" placeholder="XXXX-XXXX-XXXX">
+          </div>
+          <div class="input-group">
+            <label>Type of Cyber Crime *</label>
+            <select id="compType" required>
+              <option value="">Select Crime Type</option>
+              <option value="financial">Online Financial Fraud</option>
+              <option value="hacking">Account Hacking</option>
+              <option value="phishing">Phishing Attack</option>
+              <option value="ransomware">Ransomware Attack</option>
+              <option value="stalking">Cyber Stalking/Harassment</option>
+              <option value="identity">Identity Theft</option>
+              <option value="data">Data Breach</option>
+              <option value="other">Other Cyber Crime</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Date of Incident *</label>
+            <input type="date" id="compDate" required>
+          </div>
+          <div class="input-group">
+            <label>Amount Lost (if financial fraud)</label>
+            <input type="number" id="compAmount" placeholder="₹">
+          </div>
+          <div class="input-group">
+            <label>Detailed Description of Incident *</label>
+            <textarea id="compDescription" rows="5" placeholder="Please provide detailed description of what happened..." required></textarea>
+          </div>
+          <div class="input-group">
+            <label>Evidence/Proof (URLs, Screenshots, Transaction IDs)</label>
+            <textarea id="compEvidence" rows="3" placeholder="Provide any evidence links, transaction IDs, screenshot references..."></textarea>
+          </div>
+          <div class="input-group">
+            <label>Have you filed complaint with local police?</label>
+            <select id="compLocalPolice">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+              <option value="filing">Filing in progress</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%;">
+            <i class="fas fa-gavel"></i> Submit Cyber Complaint
+          </button>
+          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-light); text-align: center;">
+            <i class="fas fa-info-circle"></i> Under Section 66 of IT Act, 2000 - False complaints are punishable
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Cyber Cell Page -->
+    <div id="cyberCellContent" style="display: none;">
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-building"></i>
+            <h3>Cyber Crime Cells - India</h3>
+          </div>
+          <div id="cyberCellInfo"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-user-shield"></i>
+            <h3>Report to Cyber Experts</h3>
+          </div>
+          <div class="input-group">
+            <label>Assigned Cyber Expert</label>
+            <select id="cyberExpert">
+              <option>Dr. Rajesh Kumar (Cyber Forensics)</option>
+              <option>Ms. Priya Sharma (Financial Fraud)</option>
+              <option>Mr. Amit Patel (Network Security)</option>
+              <option>Dr. Neha Gupta (Digital Evidence)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Complaint Reference ID</label>
+            <input type="text" id="expertRef" placeholder="Enter your complaint ID">
+          </div>
+          <div class="input-group">
+            <label>Message for Cyber Expert</label>
+            <textarea id="expertMessage" rows="4" placeholder="Describe your issue for immediate attention..."></textarea>
+          </div>
+          <button class="btn-primary" style="width: 100%;" onclick="window.escalateToExpert()">
+            <i class="fas fa-share"></i> Escalate to Cyber Expert
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-shield-virus"></i>
+            <h3>Emergency Response Team</h3>
+          </div>
+          <div style="text-align: center; padding: 1rem;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--danger);"></i>
+            <h3 style="margin: 0.5rem 0;">CERT-In (Cyber Emergency)</h3>
+            <p>24x7 Incident Response Team</p>
+            <button class="btn-danger" style="margin-top: 1rem; width: 100%;" onclick="window.emergencyResponse()">
+              <i class="fas fa-bell"></i> Report Emergency
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools Page -->
+    <div id="toolsContent" style="display: none;">
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-key"></i>
+            <h3>Secure Password Generator</h3>
+          </div>
+          <div id="genPassword" class="password-display">Click Generate</div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn-primary" onclick="window.generateSecurePassword()">Generate</button>
+            <button class="btn-outline" onclick="window.copyPassword()">Copy</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-search"></i>
+            <h3>URL Safety Check</h3>
+          </div>
+          <div class="input-group">
+            <input type="text" id="urlCheck" placeholder="Enter URL to verify">
+            <button class="btn-primary" onclick="window.checkURLSafety()" style="margin-top: 0.5rem;">Check Safety</button>
+          </div>
+          <div id="urlResult" class="result-box"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Security Tips</h3>
+          </div>
+          <div id="securityTips"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track Complaint Page -->
+    <div id="trackContent" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-search"></i>
+          <h3>Track Your Complaint Status</h3>
+        </div>
+        <div class="input-group">
+          <label>Complaint Reference ID</label>
+          <input type="text" id="trackId" placeholder="Enter your complaint ID (e.g., CYT-2024-XXXXX)">
+          <button class="btn-primary" onclick="window.trackComplaint()" style="margin-top: 0.5rem;">Track Complaint</button>
+        </div>
+        <div id="trackResult" style="margin-top: 1rem;"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Auth Modal -->
+  <div class="modal" id="authModal">
+    <div class="auth-container">
+      <div class="auth-header">
+        <i class="fas fa-shield-halved"></i>
+        <h2 id="authTitle">Login to CyberShield</h2>
+        <p>National Cyber Security Portal</p>
+      </div>
+      
+      <div id="loginForm">
+        <div class="input-group">
+          <label>Email ID</label>
+          <input type="email" id="loginEmail" placeholder="Enter registered email">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter password">
+        </div>
+        <button class="btn-primary" style="width: 100%;" onclick="window.loginUser()">Login</button>
+        <div class="auth-switch">
+          Don't have an account? <a onclick="window.showRegister()">Register here</a>
+        </div>
+      </div>
+
+      <div id="registerForm" style="display: none;">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="regName" placeholder="Enter your full name">
+        </div>
+        <div class="input-group">
+          <label>Email ID</label>
+          <input type="email" id="regEmail" placeholder="Enter email">
+        </div>
+        <div class="input-group">
+          <label>Mobile Number</label>
+          <input type="tel" id="regPhone" placeholder="10 digit mobile number">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="regPassword" placeholder="Create password (min 8 chars)">
+        </div>
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <input type="password" id="regConfirm" placeholder="Confirm password">
+        </div>
+        <button class="btn-primary" style="width: 100%;" onclick="window.registerUser()">Register</button>
+        <div class="auth-switch">
+          Already have an account? <a onclick="window.showLogin()">Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Files -->
+  <script src="data/database.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/complaints.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
