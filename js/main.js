@@ -62,11 +62,24 @@
       };
     }
     
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.onclick = () => {
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+      };
+    }
+    
     // Navigation links
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.onclick = (e) => {
         e.preventDefault();
         window.navigateTo(link.dataset.page);
+        // Close mobile menu after navigation
+        if (navLinks) navLinks.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
       };
     });
   }

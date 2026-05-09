@@ -98,6 +98,7 @@ body::before {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
 }
 
 .logo {
@@ -178,6 +179,34 @@ body::before {
 .nav-links a.active {
   color: #00d9ff;
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  padding: 0.5rem;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-gray);
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
 }
 
 .btn-outline {
@@ -893,7 +922,40 @@ body::before {
   }
 
   .nav-links {
-    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 15, 35, 0.95);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links a {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex;
   }
 
   .btn-outline, #authButton {
@@ -1185,15 +1247,18 @@ body::before {
 @supports (-webkit-touch-callout: none) {
   body {
     -webkit-user-select: none;
+    user-select: none;
     -webkit-user-drag: none;
   }
 
   .card, .stat-card, .btn-primary, .btn-outline {
     -webkit-user-select: none;
+    user-select: none;
   }
 
   input, textarea, select {
     -webkit-user-select: text;
+    user-select: text;
     font-size: 16px;
   }
 
